@@ -1,0 +1,1 @@
+Do not put confidential source files in the public repository. `.gitignore` excludes CSV data and outputs. Locally create `analysis_private.csv` using model-ready logged columns, or pass `--input` to the script.

@@ -1,0 +1,59 @@
+# SUPPLEMENTARY EXPERIMENT SETTINGS — NOT CLAIMED TO BE ORIGINAL PAPER SETTINGS.
+# Input is a PRIVATE, model-ready CSV with logged values already constructed.
+# All logged variables must follow the exact transformation used in the manuscript.
+input_csv: data/analysis_private.csv
+output_dir: outputs
+
+# Proposed settings for ADDITIONAL learner sensitivity checks.
+# Set these to the original script's values before claiming direct replication.
+seed: 2026
+folds: 5
+split_repetitions: 1      # set to 3 or more to evaluate split sensitivity + median
+periods:
+  pre: [2005, 2019]
+  post: [2020, 2024]
+learners: [rf, lasso, gbr, ensemble]
+models: [baseline, interaction]
+connectivity_measures: [direct_cities, avg_seats]
+outcomes: [commercial_export, commercial_import, transport_export, transport_import, travel_export, travel_import]
+
+# Input column mapping: replace right-hand names to match YOUR PRIVATE CSV.
+columns:
+  partner: partner
+  year: year
+  commercial_export: ln_commercial_export
+  commercial_import: ln_commercial_import
+  transport_export: ln_transport_export
+  transport_import: ln_transport_import
+  travel_export: ln_travel_export
+  travel_import: ln_travel_import
+  direct_cities: ln_direct_cities
+  avg_seats: ln_average_seats_per_direct_city
+  internet: ln_internet_penetration
+  direct_cities_iv: ln_average_connect_city_number
+  avg_seats_iv: ln_common_city_number
+  internet_iv: ln_internet_diffusion_exposure
+  rta: rta
+  lsbci: lsbci
+  exchange_rate: ln_exchange_rate
+  gdp_pc: ln_gdp_per_capita
+
+controls: [rta, lsbci, exchange_rate, gdp_pc]
+
+# Transparent, illustrative hyperparameters for the SUPPLEMENTARY tests.
+# No assertion that these are the RF hyperparameters used in the paper.
+rf:
+  n_estimators: 200
+  max_depth: null
+  min_samples_leaf: 5
+  max_features: 1.0
+  n_jobs: 1
+lasso:
+  cv: 3
+  max_iter: 10000
+gbr:
+  n_estimators: 150
+  max_depth: 3
+  learning_rate: 0.05
+  min_samples_leaf: 5
+  subsample: 0.8
